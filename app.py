@@ -1,4 +1,4 @@
-from flask import Flask, request, jsonify, render_template  
+from flask import Flask, request, jsonify, render_template, redirect, url_for
 import random
 from datetime import datetime
 import locale
@@ -12,7 +12,7 @@ app = Flask(__name__)
 trash_dict = {
     "Lunes": "Organico", 
     "Martes": "Plastica",
-    "Miercoles": "Organico",
+    "Miércoles": "Organico",
     "Jueves": "Carta e Cartone",
     "Viernes": "Organico",
     "Domingo": "Indifferenziato",
@@ -67,6 +67,12 @@ def distribute():
     current_day_of_week = now.strftime("%A")
 
     return render_template('result.html', distribution=distribution, current_week=current_week, current_date=current_date, current_day_of_week=days_of_week[current_day_of_week])
+
+@app.route('/basura')
+def basura():
+    return redirect(url_for('distribute', 
+        names=['Cele', 'Simo', 'Jime', 'Manu'], 
+        objects=['Lunes', 'Martes', 'Miércoles', 'Jueves', 'Viernes', 'Domingo']))
 
 if __name__ == '__main__':
     app.run(debug=True, port=80)
