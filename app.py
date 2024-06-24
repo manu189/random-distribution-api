@@ -6,12 +6,12 @@ from datetime import datetime
 app = Flask(__name__)
 
 trash_dict = {
-    "Lunes": "orgánica", 
-    "Martes": "papel",
-    "Miercoles": "orgánica",
-    "Jueves": "plástica",
-    "Viernes": "orgánica",
-    "Domingo": "indiferenciada",
+    "Lunes": "Organico", 
+    "Martes": "Plastica",
+    "Miercoles": "Organico",
+    "Jueves": "Carta e Cartone",
+    "Viernes": "Organico",
+    "Domingo": "Indifferenziato",
 }
 
 
