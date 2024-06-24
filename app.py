@@ -18,6 +18,15 @@ trash_dict = {
     "Domingo": "Indifferenziato",
 }
 
+days_of_week = {
+    "Monday": "Lunes",
+    "Tuesday": "Martes",
+    "Wednesday": "Miércoles",
+    "Thursday": "Jueves",
+    "Friday": "Viernes",
+    "Saturday": "Sábado",
+    "Sunday": "Domingo"
+}
 
 def get_current_week_seed():
     now = datetime.now()
@@ -57,7 +66,7 @@ def distribute():
     current_date = now.strftime("%Y-%m-%d")
     current_day_of_week = now.strftime("%A")
 
-    return render_template('result.html', distribution=distribution, current_week=current_week, current_date=current_date, current_day_of_week=current_day_of_week)
+    return render_template('result.html', distribution=distribution, current_week=current_week, current_date=current_date, current_day_of_week=days_of_week[current_day_of_week])
 
 if __name__ == '__main__':
     app.run(debug=True, port=80)
