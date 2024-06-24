@@ -11,6 +11,10 @@
 <body>
     <div class="container">
         <h1 class="text-center mt-5">Sacar Basura</h1>
+        <div class="text-center mb-3">
+            <p><strong>Week:</strong> {{ current_week }}</p>
+            <p><strong>Date:</strong> {{ current_date }}</p>
+        </div>
         {% if error %}
             <div class="alert alert-danger">{{ error }}</div>
         {% else %}
@@ -29,9 +33,6 @@
                 </div>
             {% endfor %}
         {% endif %}
-        <!-- <div class="text-center mt-4">
-            <a href="/" class="btn btn-primary">Go Back</a>
-        </div> -->
     </div>
     <!-- Bootstrap JS and dependencies -->
     <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>

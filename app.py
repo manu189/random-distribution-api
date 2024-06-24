@@ -45,7 +45,14 @@ def distribute():
         distribution[person].append(obj)
 
     # return jsonify(distribution)
-    return render_template('result.html', distribution=distribution)
+    # return render_template('result.html', distribution=distribution)
+
+    # Get current week and date
+    now = datetime.now()
+    current_week = now.isocalendar()[1]
+    current_date = now.strftime("%Y-%m-%d")
+
+    return render_template('result.html', distribution=distribution, current_week=current_week, current_date=current_date)
 
 if __name__ == '__main__':
     app.run(debug=True, port=80)
