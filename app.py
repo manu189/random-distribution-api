@@ -1,4 +1,4 @@
-from flask import Flask, request, jsonify
+from flask import Flask, request, jsonify, render_template  
 import random
 from datetime import datetime
 
@@ -14,8 +14,11 @@ def distribute():
     names = request.args.getlist('names')
     objects = request.args.getlist('objects')
 
+    # if not names or not objects:
+    #     return jsonify({'error': 'Invalid input'}), 400
+    
     if not names or not objects:
-        return jsonify({'error': 'Invalid input'}), 400
+        return render_template('result.html', error='Invalid input')
 
     seed = get_current_week_seed()
     random.seed(seed)
@@ -30,7 +33,8 @@ def distribute():
         person = names[i % len(names)]
         distribution[person].append(obj)
 
-    return jsonify(distribution)
+    # return jsonify(distribution)
+    return render_template('result.html', distribution=distribution)
 
 if __name__ == '__main__':
     app.run(debug=True, port=80)
