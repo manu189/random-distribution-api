@@ -66,3 +66,7 @@ h1 {
 .alert {
     font-size: 1.2em;
 }
+
+.text-danger {
+    color: #dc3545;
+}

@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="es">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -12,8 +12,9 @@
     <div class="container">
         <h1 class="text-center mt-5">Sacar Basura</h1>
         <div class="text-center mb-3">
-            <p><strong>Week:</strong> {{ current_week }}</p>
-            <p><strong>Date:</strong> {{ current_date }}</p>
+            <p><strong>Semana:</strong> {{ current_week }}</p>
+            <p><strong>Fecha:</strong> {{ current_date }}</p>
+            <p><strong>Hoy es:</strong> <span class="text-danger">{{ current_day_of_week }}</span></p>
         </div>
         {% if error %}
             <div class="alert alert-danger">{{ error }}</div>

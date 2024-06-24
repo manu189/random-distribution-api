@@ -1,9 +1,13 @@
 from flask import Flask, request, jsonify, render_template  
 import random
 from datetime import datetime
+import locale
 
 
 app = Flask(__name__)
+
+# Set locale to Spanish
+locale.setlocale(locale.LC_TIME, 'es_ES.UTF-8')
 
 trash_dict = {
     "Lunes": "Organico", 
@@ -47,12 +51,13 @@ def distribute():
     # return jsonify(distribution)
     # return render_template('result.html', distribution=distribution)
 
-    # Get current week and date
+    # Get current week, date and day of the week
     now = datetime.now()
     current_week = now.isocalendar()[1]
     current_date = now.strftime("%Y-%m-%d")
+    current_day_of_week = now.strftime("%A")
 
-    return render_template('result.html', distribution=distribution, current_week=current_week, current_date=current_date)
+    return render_template('result.html', distribution=distribution, current_week=current_week, current_date=current_date, current_day_of_week=current_day_of_week)
 
 if __name__ == '__main__':
     app.run(debug=True, port=80)
