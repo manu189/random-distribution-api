@@ -6,8 +6,8 @@ import locale
 
 app = Flask(__name__)
 
-# Set locale to Spanish
-locale.setlocale(locale.LC_TIME, 'es_ES.UTF-8')
+# # Set locale to Spanish
+# locale.setlocale(locale.LC_TIME, 'es_ES.UTF-8')
 
 trash_dict = {
     "Lunes": "Organico", 
