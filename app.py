@@ -5,6 +5,16 @@ from datetime import datetime
 
 app = Flask(__name__)
 
+trash_dict = {
+    "Lunes": "orgánica", 
+    "Martes": "papel",
+    "Miercoles": "orgánica",
+    "Jueves": "plástica",
+    "Viernes": "orgánica",
+    "Domingo": "indiferenciada",
+}
+
+
 def get_current_week_seed():
     now = datetime.now()
     return now.year * 100 + now.isocalendar()[1]
@@ -25,6 +35,7 @@ def distribute():
 
     # Shuffle objects
     random.shuffle(objects)
+    objects = [f"{obj}: {trash_dict[obj]}" for obj in objects]
     random.shuffle(names)
 
     # Distribute objects
