@@ -2,6 +2,7 @@ from flask import Flask, request, jsonify, render_template, redirect, url_for
 import random
 from datetime import datetime
 import locale
+from movies import get_movie_details
 
 
 app = Flask(__name__)
@@ -73,6 +74,11 @@ def basura():
     return redirect(url_for('distribute', 
         names=['Cele', 'Simo', 'Jime', 'Manu'], 
         objects=['Lunes', 'Martes', 'Miércoles', 'Jueves', 'Viernes', 'Domingo']))
+
+@app.route('/hoySeVe')
+def index():
+    movie_title, movie_link, movie_image = get_movie_details()
+    return render_template('movies.html', title=movie_title, link=movie_link, image=movie_image)
 
 if __name__ == '__main__':
     app.run(debug=True, port=80)
