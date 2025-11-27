@@ -1,0 +1,198 @@
+/* General Styles */
+:root {
+    --primary-color: #6366f1;
+    --secondary-color: #8b5cf6;
+    --accent-color: #ec4899;
+    --dark-bg: #1e1b4b;
+    --light-bg: #f8fafc;
+    --text-dark: #1e293b;
+    --text-light: #64748b;
+    --card-bg: #ffffff;
+    --shadow-sm: 0 1px 3px 0 rgb(0 0 0 / 0.1);
+    --shadow-md: 0 4px 6px -1px rgb(0 0 0 / 0.1);
+    --shadow-lg: 0 20px 25px -5px rgb(0 0 0 / 0.1);
+    --shadow-xl: 0 25px 50px -12px rgb(0 0 0 / 0.25);
+}
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    font-family: 'Inter', 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+    min-height: 100vh;
+    color: var(--text-dark);
+    line-height: 1.6;
+}
+
+/* Trash Distribution Page Styles */
+.trash-container {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 2rem;
+}
+
+.trash-header {
+    text-align: center;
+    color: white;
+    margin-bottom: 3rem;
+    animation: fadeInDown 0.6s ease-out;
+}
+
+.trash-header h1 {
+    font-size: 3rem;
+    font-weight: 800;
+    margin-bottom: 1rem;
+    text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.2);
+}
+
+.date-info {
+    background: rgba(255, 255, 255, 0.15);
+    backdrop-filter: blur(10px);
+    border-radius: 20px;
+    padding: 1.5rem;
+    display: inline-block;
+    box-shadow: var(--shadow-lg);
+    margin-bottom: 2rem;
+}
+
+.date-info p {
+    margin: 0.5rem 0;
+    font-size: 1.1rem;
+    color: white;
+}
+
+.date-info strong {
+    font-weight: 600;
+}
+
+.date-info .text-danger {
+    color: #fbbf24 !important;
+    font-weight: 700;
+    font-size: 1.3rem;
+}
+
+/* Card Grid */
+.cards-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+    gap: 2rem;
+    animation: fadeInUp 0.8s ease-out;
+}
+
+.person-card {
+    background: var(--card-bg);
+    border-radius: 20px;
+    padding: 2rem;
+    box-shadow: var(--shadow-xl);
+    transition: all 0.3s ease;
+    animation: scaleIn 0.5s ease-out backwards;
+}
+
+.person-card:nth-child(1) { animation-delay: 0.1s; }
+.person-card:nth-child(2) { animation-delay: 0.2s; }
+.person-card:nth-child(3) { animation-delay: 0.3s; }
+.person-card:nth-child(4) { animation-delay: 0.4s; }
+
+.person-card:hover {
+    transform: translateY(-10px);
+    box-shadow: var(--shadow-xl), 0 0 30px rgba(99, 102, 241, 0.3);
+}
+
+.person-card-header {
+    font-size: 1.8rem;
+    font-weight: 700;
+    color: var(--primary-color);
+    margin-bottom: 1.5rem;
+    padding-bottom: 1rem;
+    border-bottom: 3px solid var(--primary-color);
+}
+
+.person-card ul {
+    list-style: none;
+}
+
+.person-card li {
+    padding: 0.75rem 1rem;
+    margin: 0.5rem 0;
+    background: linear-gradient(135deg, #667eea15 0%, #764ba215 100%);
+    border-radius: 12px;
+    border-left: 4px solid var(--secondary-color);
+    transition: all 0.2s ease;
+    font-size: 1.05rem;
+}
+
+.person-card li:hover {
+    transform: translateX(5px);
+    background: linear-gradient(135deg, #667eea25 0%, #764ba225 100%);
+}
+
+/* Animations */
+@keyframes fadeInDown {
+    from {
+        opacity: 0;
+        transform: translateY(-30px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+@keyframes fadeInUp {
+    from {
+        opacity: 0;
+        transform: translateY(30px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+@keyframes scaleIn {
+    from {
+        opacity: 0;
+        transform: scale(0.9);
+    }
+    to {
+        opacity: 1;
+        transform: scale(1);
+    }
+}
+
+/* Alert Styles */
+.alert {
+    background: rgba(239, 68, 68, 0.9);
+    color: white;
+    padding: 1.5rem;
+    border-radius: 12px;
+    margin: 2rem 0;
+    box-shadow: var(--shadow-lg);
+    animation: shake 0.5s ease;
+}
+
+@keyframes shake {
+    0%, 100% { transform: translateX(0); }
+    25% { transform: translateX(-10px); }
+    75% { transform: translateX(10px); }
+}
+
+/* Responsive Design */
+@media (max-width: 768px) {
+    .trash-header h1 {
+        font-size: 2rem;
+    }
+    
+    .cards-grid {
+        grid-template-columns: 1fr;
+        gap: 1.5rem;
+    }
+    
+    .trash-container {
+        padding: 1rem;
+    }
+}

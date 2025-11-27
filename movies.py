@@ -4,6 +4,15 @@ import requests
 import json
 from bs4 import BeautifulSoup
 import random
+from datetime import datetime, timedelta
+import html
+
+# Cache configuration
+_movies_cache = {
+    'data': None,
+    'timestamp': None,
+    'ttl': timedelta(hours=24)  # Cache expires after 24 hours
+}
 
 def get_top_250_movies():
     url = "https://www.imdb.com/chart/top/?ref_=nv_mv_250"
@@ -18,7 +27,21 @@ def get_top_250_movies():
 
     return movies
 
+def _is_cache_valid():
+    """Check if the cache is still valid."""
+    if _movies_cache['data'] is None or _movies_cache['timestamp'] is None:
+        return False
+    
+    time_elapsed = datetime.now() - _movies_cache['timestamp']
+    return time_elapsed < _movies_cache['ttl']
+
 def fetch_movies():
+    """Fetch movies with caching to avoid repeated API calls."""
+    # Return cached data if still valid
+    if _is_cache_valid():
+        return _movies_cache['data']
+    
+    # Fetch fresh data
     url = 'https://caching.graphql.imdb.com/?operationName=Top250MoviesPagination&variables=%7B%22first%22%3A125%2C%22locale%22%3A%22es-ES%22%7D&extensions=%7B%22persistedQuery%22%3A%7B%22sha256Hash%22%3A%2226114ee01d97e04f65d6c8c7212ae8b7888fa57ceed105450d1fce09df749b2d%22%2C%22version%22%3A1%7D%7D'
 
     headers = {
@@ -54,7 +77,13 @@ def fetch_movies():
     response = requests.get('https://caching.graphql.imdb.com/', params=params, headers=headers)
     data = response.json()
 
-    return [movie.get("node").get("id") for movie in data['data']['chartTitles']['edges']]
+    movies = [movie.get("node").get("id") for movie in data['data']['chartTitles']['edges']]
+    
+    # Update cache
+    _movies_cache['data'] = movies
+    _movies_cache['timestamp'] = datetime.now()
+    
+    return movies
 
 def get_random_movie():
     movies = fetch_movies()
@@ -73,7 +102,7 @@ def get_movie_details():
     soup = BeautifulSoup(response.content, 'html.parser')
     movie_data = json.loads(soup.find('script', type='application/ld+json',).string)
 
-    title = movie_data.get("name")
+    title = html.unescape(movie_data.get("name"))
     image = movie_data.get("image")
     link = movie_data.get("url")
 

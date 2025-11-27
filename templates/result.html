@@ -3,41 +3,43 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Sacar Basura</title>
-    <!-- Bootstrap CSS -->
-    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+    <title>🗑️ Sacar Basura</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700;800&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="{{ url_for('static', filename='styles.css') }}">
 </head>
 <body>
-    <div class="container">
-        <h1 class="text-center mt-5">Sacar Basura</h1>
-        <div class="text-center mb-3">
-            <p><strong>Semana:</strong> {{ current_week }}</p>
-            <p><strong>Fecha:</strong> {{ current_date }}</p>
-            <p><strong>Hoy es:</strong> <span class="text-danger">{{ current_day_of_week }}</span></p>
+    <div class="trash-container">
+        <div class="trash-header">
+            <h1>🗑️ Distribución de Basura</h1>
+            <div class="date-info">
+                <p><strong>📅 Semana:</strong> {{ current_week }}</p>
+                <p><strong>📆 Fecha:</strong> {{ current_date }}</p>
+                <p><strong>🌟 Hoy es:</strong> <span class="text-danger">{{ current_day_of_week }}</span></p>
+            </div>
         </div>
+        
         {% if error %}
-            <div class="alert alert-danger">{{ error }}</div>
+            <div class="alert">
+                ⚠️ {{ error }}
+            </div>
         {% else %}
-            {% for name, objs in distribution.items() %}
-                <div class="card mt-3">
-                    <div class="card-header">
-                        <strong>{{ name }}</strong>
-                    </div>
-                    <div class="card-body">
+            <div class="cards-grid">
+                {% for name, objs in distribution.items() %}
+                    <div class="person-card">
+                        <div class="person-card-header">
+                            👤 {{ name }}
+                        </div>
                         <ul>
                             {% for obj in objs %}
                                 <li>{{ obj }}</li>
                             {% endfor %}
                         </ul>
                     </div>
-                </div>
-            {% endfor %}
+                {% endfor %}
+            </div>
         {% endif %}
     </div>
-    <!-- Bootstrap JS and dependencies -->
-    <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
-    <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.5.4/dist/umd/popper.min.js"></script>
-    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
 </body>
 </html>
