@@ -1,15 +1,15 @@
 from flask import Flask, request, render_template, redirect, url_for
 import random
 from datetime import datetime
-import locale
 import pytz
 from movies import get_movie_details
+
+from babel.dates import format_datetime
 
 
 app = Flask(__name__)
 
-# Set locale to Spanish
-locale.setlocale(locale.LC_TIME, 'es_ES.UTF-8')
+format_datetime(datetime.now(), locale='es')
 
 trash_dict = {
     "Lunes": "Organico", 
